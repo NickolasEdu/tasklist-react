@@ -10,21 +10,31 @@ const StyleDefault = styled.div`
 const Main = () => {
 
   const [ task, setTask] = useState("")
+  const [ items, setItems] = useState([])
 
   function handleChange(e) {
     let inputTask = e.target.value
     setTask(inputTask)
   }  
 
+  function addItem(e) {
+    e.preventDefault()
+    
+    if (task !== "") {
+      setItems([...items, task])
+      setTask("")
+    }
+  }
+
   return (
     <StyleDefault>
       <h1>Hello World</h1>
       <form>
-        <input onChange={handleChange} placeholder="Type a new task" type="text"></input>
-        <button>Add</button>
+        <input onChange={handleChange} placeholder="Type a new task" type="text" value={task}></input>
+        <button onClick={addItem}>Add</button>
         
         <ul>
-          <li>{task}</li>
+          {items.map(item => <li>{item}</li>)}
         </ul>
       </form>
     </StyleDefault>
