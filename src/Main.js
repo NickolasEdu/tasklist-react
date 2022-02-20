@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { useState } from "react";
 
 const StyleDefault = styled.div`
   margin: auto;
@@ -8,15 +9,22 @@ const StyleDefault = styled.div`
 
 const Main = () => {
 
+  const [ task, setTask] = useState("")
+
+  function handleChange(e) {
+    let inputTask = e.target.value
+    setTask(inputTask)
+  }  
+
   return (
     <StyleDefault>
       <h1>Hello World</h1>
       <form>
-        <input type="text"></input>
+        <input onChange={handleChange} placeholder="Type a new task" type="text"></input>
         <button>Add</button>
         
         <ul>
-          <li>Item 1</li>
+          <li>{task}</li>
         </ul>
       </form>
     </StyleDefault>
